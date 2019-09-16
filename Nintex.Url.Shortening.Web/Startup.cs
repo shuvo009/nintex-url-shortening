@@ -15,6 +15,7 @@ using Nintex.Url.Shortening.Core.Utility;
 using Nintex.Url.Shortening.DependencyInjection;
 using Nintex.Url.Shortening.Repository.DbContext;
 using Nintex.Url.Shortening.Web.Middleware;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Nintex.Url.Shortening.Web
 {
@@ -76,6 +77,13 @@ namespace Nintex.Url.Shortening.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSwaggerGen(c => {  
+                c.SwaggerDoc("v1", new Info {  
+                    Version = "v1",  
+                    Title = "Short URL API",  
+                    Description = "Nintex Short URL"  
+                });  
+            });  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,12 +117,13 @@ namespace Nintex.Url.Shortening.Web
             app.UseAuthentication();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    "default",
-                    "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
+
+            app.UseSwagger();  
+            app.UseSwaggerUI(c => {  
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Short URL API");  
+                c.RoutePrefix = "docs/swagger";
+            });  
         }
     }
 }
