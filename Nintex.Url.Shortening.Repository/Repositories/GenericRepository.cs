@@ -11,13 +11,13 @@ namespace Nintex.Url.Shortening.Repository.Repositories
 {
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal readonly ShortUrlDbContext WebProDbContext;
+        internal readonly ShortUrlDbContext ShortUrlDbContext;
         protected DbSet<TEntity> InternalSet;
 
-        protected GenericRepository(ShortUrlDbContext webProDbContext)
+        protected GenericRepository(ShortUrlDbContext shortUrlDbContext)
         {
-            WebProDbContext = webProDbContext;
-            InternalSet = WebProDbContext.Set<TEntity>();
+            ShortUrlDbContext = shortUrlDbContext;
+            InternalSet = ShortUrlDbContext.Set<TEntity>();
         }
 
         public IQueryable<TEntity> GetAll()
@@ -35,21 +35,25 @@ namespace Nintex.Url.Shortening.Repository.Repositories
             return InternalSet.FirstOrDefaultAsync(pExpression);
         }
 
-        public Task Save()
+        public Task Remove(TEntity model)
         {
-            return WebProDbContext.SaveChangesAsync();
+            ShortUrlDbContext.Entry(model).State = EntityState.Deleted;
+            return Save();
         }
 
         public Task Insert(TEntity model)
         {
-            WebProDbContext.Entry(model).State = EntityState.Added;
+            ShortUrlDbContext.Entry(model).State = EntityState.Added;
             return Save();
         }
 
-        public Task Update(TEntity model)
+        #region Supported Methods
+
+        private Task Save()
         {
-            WebProDbContext.Entry(model).State = EntityState.Modified;
-            return Save();
+            return ShortUrlDbContext.SaveChangesAsync();
         }
+
+        #endregion
     }
 }

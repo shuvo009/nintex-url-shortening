@@ -6,7 +6,7 @@ namespace Nintex.Url.Shortening.Repository.Repositories
 {
     public class ShortUrlLogEntryRepository : GenericRepository<ShortUrlLogEntryModel>, IShortUrlLogEntryRepository
     {
-        public ShortUrlLogEntryRepository(ShortUrlDbContext webProDbContext) : base(webProDbContext)
+        public ShortUrlLogEntryRepository(ShortUrlDbContext shortUrlDbContext) : base(shortUrlDbContext)
         {
         }
     }

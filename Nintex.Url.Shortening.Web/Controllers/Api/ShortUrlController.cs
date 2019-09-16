@@ -24,7 +24,13 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
             _currentLoginUser = currentLoginUser;
         }
 
-        [AllowAnonymous]
+        [HttpGet("get")]
+        public async Task<IActionResult> Get()
+        {
+            var shortUrls = await _shortUrlService.GetAllShortUrlOfAUser(_currentLoginUser.AccountId);
+            return Ok(shortUrls);
+        }
+
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] ShortUrlCreateRequest shortUrlCreateRequest)
         {
@@ -32,6 +38,14 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
             shortUrlCreateRequest.HostUrl = GetHostUrl();
             var shortUrlCreateResponse = await _shortUrlService.Create(shortUrlCreateRequest);
             return Ok(shortUrlCreateResponse);
+        }
+        
+        [HttpPost("remove")]
+        public async Task<IActionResult> Remove([FromBody] ShortUrlRemoveRequest shortUrlRemoveRequest)
+        {
+            shortUrlRemoveRequest.UserId = _currentLoginUser.AccountId;
+            await _shortUrlService.Remove(shortUrlRemoveRequest);
+            return Ok();
         }
 
         #region Supported Methods

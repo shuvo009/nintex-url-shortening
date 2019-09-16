@@ -6,7 +6,7 @@ namespace Nintex.Url.Shortening.Repository.Repositories
 {
     public class AccountRepository : GenericRepository<AccountModel>, IAccountRepository
     {
-        public AccountRepository(ShortUrlDbContext webProDbContext) : base(webProDbContext)
+        public AccountRepository(ShortUrlDbContext shortUrlDbContext) : base(shortUrlDbContext)
         {
         }
     }

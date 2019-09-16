@@ -12,8 +12,7 @@ namespace Nintex.Url.Shortening.Core.Interfaces.Repository
         IQueryable<TEntity> GetAll();
         Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> pExpression);
         Task<TEntity> FirstOrDefault(Expression<Func<TEntity, bool>> pExpression);
-        Task Save();
+        Task Remove(TEntity model);
         Task Insert(TEntity model);
-        Task Update(TEntity model);
     }
 }

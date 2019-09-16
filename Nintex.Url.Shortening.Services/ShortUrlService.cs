@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Nintex.Url.Shortening.Core.DbModels;
+using Nintex.Url.Shortening.Core.Exceptions;
 using Nintex.Url.Shortening.Core.Interfaces.Repository;
 using Nintex.Url.Shortening.Core.Interfaces.Services;
 using Nintex.Url.Shortening.Core.Utility;
@@ -43,6 +44,20 @@ namespace Nintex.Url.Shortening.Services
             };
 
             return shortUrlCreateResponse;
+        }
+
+        public async Task Remove(ShortUrlRemoveRequest shortUrlRemoveRequest)
+        {
+            var shortUrlModel = await _shortUrlRepository.FirstOrDefault(x =>
+                x.Id == shortUrlRemoveRequest.Id && x.CreatorId == shortUrlRemoveRequest.UserId);
+            if(shortUrlModel == null)
+                throw new ShortUrlNotFoundException();
+            await _shortUrlRepository.Remove(shortUrlModel);
+        }
+
+        public Task<List<ShortUrlModel>> GetAllShortUrlOfAUser(long accountId)
+        {
+            return _shortUrlRepository.Find(x => x.CreatorId == accountId);
         }
 
         #region Supported Methods
