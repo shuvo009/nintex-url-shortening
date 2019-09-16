@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nintex.Url.Shortening.Core\Nintex.Url.Shortening.Core.csproj" />
+    <ProjectReference Include="..\Nintex.Url.Shortening.Identity\Nintex.Url.Shortening.Identity.csproj" />
+    <ProjectReference Include="..\Nintex.Url.Shortening.Repository\Nintex.Url.Shortening.Repository.csproj" />
+    <ProjectReference Include="..\Nintex.Url.Shortening.Services\Nintex.Url.Shortening.Services.csproj" />
+  </ItemGroup>
+
+</Project>
