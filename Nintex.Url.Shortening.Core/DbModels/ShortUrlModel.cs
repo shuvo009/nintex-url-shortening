@@ -9,10 +9,6 @@ namespace Nintex.Url.Shortening.Core.DbModels
 
         [Required] public string Url { get; set; }
 
-        public string MetaData { get; set; }
-
-        public int CreatorAccessTokenId { get; set; }
-
         [Required] public DateTime CreatedUtc { get; set; }
 
         public DateTime? ExpiresUtc { get; set; }

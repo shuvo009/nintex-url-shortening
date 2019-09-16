@@ -17,6 +17,7 @@ using Nintex.Url.Shortening.Core.Interfaces.Repository;
 using Nintex.Url.Shortening.Core.Utility;
 using Nintex.Url.Shortening.DependencyInjection;
 using Nintex.Url.Shortening.Repository.DbContext;
+using Nintex.Url.Shortening.Web.Middleware;
 
 namespace Nintex.Url.Shortening.Web
 {
@@ -110,6 +111,7 @@ namespace Nintex.Url.Shortening.Web
                 .AllowCredentials());
 
             app.UseAuthentication();
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseMvc(routes =>
             {

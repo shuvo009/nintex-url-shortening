@@ -7,5 +7,7 @@
         public static string UserAlreadyExist = "User already exist";
         public static string ClaimAccountId = "AccountId";
         public static string PasswordDoesNotMatch = "Password is not match";
+        public static int KeyLength => 8;
+        public static int ShortUrlExpireDays => 30;
     }
 }

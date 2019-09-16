@@ -11,16 +11,11 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IAccountRepository _accountRepository;
-        private readonly ICurrentLoginUser _currentLoginUser;
         private readonly IUserStore _userStore;
 
-        public UsersController(IUserStore userStore, ICurrentLoginUser currentLoginUser,
-            IAccountRepository accountRepository)
+        public UsersController(IUserStore userStore)
         {
             _userStore = userStore;
-            _currentLoginUser = currentLoginUser;
-            _accountRepository = accountRepository;
         }
 
         [AllowAnonymous]
