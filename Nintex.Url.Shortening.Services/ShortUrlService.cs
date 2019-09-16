@@ -26,7 +26,7 @@ namespace Nintex.Url.Shortening.Services
 
         public async Task<ShortUrlCreateResponse> Create(ShortUrlCreateRequest shortUrlCreateRequest)
         {
-            shortUrlCreateRequest.LongUrl = shortUrlCreateRequest.LongUrl.Trim();
+            shortUrlCreateRequest.LongUrl = shortUrlCreateRequest.LongUrl?.Trim();
             ValidUrlGuard(shortUrlCreateRequest.LongUrl);
 
             var keyInfo = await GenerateShortKey();
@@ -54,6 +54,7 @@ namespace Nintex.Url.Shortening.Services
             if(shortUrlModel == null)
                 throw new ShortUrlNotFoundException();
             await _shortUrlRepository.Remove(shortUrlModel);
+            await _shortUrlLogEntryRepository.RemoveLogs(shortUrlModel.Id);
         }
 
         public Task<List<ShortUrlModel>> GetAllShortUrlOfAUser(long accountId)
@@ -68,6 +69,11 @@ namespace Nintex.Url.Shortening.Services
                 throw new ShortUrlNotFoundException();
             await _shortUrlLogEntryRepository.Log(shortUrlModel.Id, remoteIp);
             return shortUrlModel;
+        }
+
+        public Task<List<ShortUrlLogEntryModel>> GetShortUrlLogs(long shortUrlId)
+        {
+            return _shortUrlLogEntryRepository.Find(x => x.ShortUrlId == shortUrlId);
         }
 
         #region Supported Methods

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nintex.Url.Shortening.Core.Interfaces.Auth;
 using Nintex.Url.Shortening.Core.Interfaces.Services;
@@ -29,6 +25,13 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
         {
             var shortUrls = await _shortUrlService.GetAllShortUrlOfAUser(_currentLoginUser.AccountId);
             return Ok(shortUrls);
+        }
+        
+        [HttpGet("logs/{shortUrlId}")]
+        public async Task<IActionResult> Get(Int64 shortUrlId)
+        {
+            var shortUrlLogEntryModels = await _shortUrlService.GetShortUrlLogs(shortUrlId);
+            return Ok(shortUrlLogEntryModels);
         }
 
         [HttpPost("create")]

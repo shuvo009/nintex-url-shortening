@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Nintex.Url.Shortening.Core.Interfaces.Auth;
-using Nintex.Url.Shortening.Core.Interfaces.Repository;
 using Nintex.Url.Shortening.Core.Utility;
 using Nintex.Url.Shortening.DependencyInjection;
 using Nintex.Url.Shortening.Repository.DbContext;
@@ -35,7 +32,8 @@ namespace Nintex.Url.Shortening.Web
         {
             services.AddCors();
 
-            services.AddDbContext<ShortUrlDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ShortUrlDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             new DependencyServiceRegister().Register(services);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -51,7 +49,8 @@ namespace Nintex.Url.Shortening.Web
                     {
                         OnTokenValidated = context =>
                         {
-                            var currentUser = context.HttpContext.RequestServices.GetRequiredService<ICurrentLoginUser>();
+                            var currentUser =
+                                context.HttpContext.RequestServices.GetRequiredService<ICurrentLoginUser>();
                             currentUser.SetClaims(context.Principal.Claims);
                             return Task.CompletedTask;
                         }
@@ -84,24 +83,20 @@ namespace Nintex.Url.Shortening.Web
         {
             try
             {
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                using (var serviceScope =
+                    app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     serviceScope.ServiceProvider.GetService<ShortUrlDbContext>().Database.Migrate();
                 }
             }
             catch (Exception ex)
             {
-                
             }
 
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
                 app.UseExceptionHandler("/Error");
-            }
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -117,8 +112,8 @@ namespace Nintex.Url.Shortening.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Nintex.Url.Shortening.Core.DbModels;
+﻿using Nintex.Url.Shortening.Core.DbModels;
 
 namespace Nintex.Url.Shortening.Core.Interfaces.Repository
 {

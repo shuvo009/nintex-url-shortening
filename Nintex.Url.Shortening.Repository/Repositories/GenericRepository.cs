@@ -20,11 +20,6 @@ namespace Nintex.Url.Shortening.Repository.Repositories
             InternalSet = ShortUrlDbContext.Set<TEntity>();
         }
 
-        public IQueryable<TEntity> GetAll()
-        {
-            return InternalSet;
-        }
-
         public Task<List<TEntity>> Find(Expression<Func<TEntity, bool>> pExpression)
         {
             return InternalSet.Where(pExpression).ToListAsync();

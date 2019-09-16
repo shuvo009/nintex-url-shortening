@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nintex.Url.Shortening.Core.Interfaces.Auth;
-using Nintex.Url.Shortening.Core.Interfaces.Repository;
 using Nintex.Url.Shortening.Core.ViewModels;
 
 namespace Nintex.Url.Shortening.Web.Controllers.Api
