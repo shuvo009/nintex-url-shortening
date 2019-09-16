@@ -31,7 +31,7 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
             shortUrlCreateRequest.UserId = _currentLoginUser.AccountId;
             shortUrlCreateRequest.HostUrl = GetHostUrl();
             var shortUrlCreateResponse = await _shortUrlService.Create(shortUrlCreateRequest);
-            return Ok(new ServerResponse<ShortUrlCreateResponse> { IsSuccess = true, Data = shortUrlCreateResponse });
+            return Ok(shortUrlCreateResponse);
         }
 
         #region Supported Methods

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Nintex.Url.Shortening.Core.DbModels;
 using Nintex.Url.Shortening.Core.Interfaces.Repository;
@@ -23,19 +24,22 @@ namespace Nintex.Url.Shortening.Services
 
         public async Task<ShortUrlCreateResponse> Create(ShortUrlCreateRequest shortUrlCreateRequest)
         {
-            if (String.IsNullOrEmpty(shortUrlCreateRequest.LongUrl))
-                throw new Exception("Long url is required");
+            shortUrlCreateRequest.LongUrl = shortUrlCreateRequest.LongUrl.Trim();
+            ValidUrlGuard(shortUrlCreateRequest.LongUrl);
 
             var keyInfo = await GenerateShortKey();
             if (!keyInfo.Success)
                 throw new Exception("An internal error occured");
 
-            var shortUrlModel = await CreateShortUrl(shortUrlCreateRequest, keyInfo.Key);
-
+            var shortUrlKey = await GetExistingShortUrl(shortUrlCreateRequest.LongUrl);
+            if (string.IsNullOrEmpty(shortUrlKey))
+            {
+                shortUrlKey = await CreateShortUrl(shortUrlCreateRequest, keyInfo.Key);
+            }
             var shortUrlCreateResponse = new ShortUrlCreateResponse
             {
-                LongUrl = shortUrlModel.Url,
-                SortUrl = $"{shortUrlCreateRequest.HostUrl}/{shortUrlModel.Key}"
+                LongUrl = shortUrlCreateRequest.LongUrl,
+                SortUrl = $"{shortUrlCreateRequest.HostUrl}/{shortUrlKey}"
             };
 
             return shortUrlCreateResponse;
@@ -69,8 +73,8 @@ namespace Nintex.Url.Shortening.Services
             }
             return new string(ret);
         }
-       
-        private async Task<ShortUrlModel> CreateShortUrl(ShortUrlCreateRequest shortUrlCreateRequest, string key)
+
+        private async Task<string> CreateShortUrl(ShortUrlCreateRequest shortUrlCreateRequest, string key)
         {
             var shortUrlModel = new ShortUrlModel
             {
@@ -82,7 +86,29 @@ namespace Nintex.Url.Shortening.Services
                 Url = shortUrlCreateRequest.LongUrl
             };
             await _shortUrlRepository.Insert(shortUrlModel);
-            return shortUrlModel;
+            return shortUrlModel.Key;
+        }
+
+        private bool CheckUrl(string url)
+        {
+            var isValid = Regex.IsMatch(url, ApplicationVariable.UrlPatten);
+            return isValid;
+        }
+
+        private void ValidUrlGuard(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new Exception("Long url is required");
+            if (!CheckUrl(url))
+                throw new Exception("Url is not valid");
+        }
+
+        private async Task<string> GetExistingShortUrl(string longUrl)
+        {
+            var existingShortUrlModel = await _shortUrlRepository.FirstOrDefault(
+                    x => x.Url.Equals(longUrl, StringComparison.CurrentCultureIgnoreCase));
+
+            return existingShortUrlModel?.Key;
         }
 
         #endregion
