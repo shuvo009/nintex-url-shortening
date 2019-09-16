@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -7,8 +7,16 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nintex.Url.Shortening.Core\Nintex.Url.Shortening.Core.csproj" />
+    <ProjectReference Include="..\Nintex.Url.Shortening.DependencyInjection\Nintex.Url.Shortening.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Nintex.Url.Shortening.Repository\Nintex.Url.Shortening.Repository.csproj" />
   </ItemGroup>
 
 </Project>

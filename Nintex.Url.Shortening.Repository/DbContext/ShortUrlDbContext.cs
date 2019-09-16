@@ -3,7 +3,7 @@ using Nintex.Url.Shortening.Core.DbModels;
 
 namespace Nintex.Url.Shortening.Repository.DbContext
 {
-    class ShortUrlDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class ShortUrlDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public ShortUrlDbContext(DbContextOptions<ShortUrlDbContext> options) : base(options)
         {
