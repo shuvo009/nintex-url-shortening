@@ -14,13 +14,14 @@ namespace Nintex.Url.Shortening.Services
     public class ShortUrlService : IShortUrlService
     {
         private readonly IShortUrlRepository _shortUrlRepository;
+        private readonly IShortUrlLogEntryRepository _shortUrlLogEntryRepository;
         private const string ValidChars = "abcdefghjkmnprstwxz2345789";
-        private static readonly Dictionary<long, bool> ValidCharLookup = new Dictionary<long, bool>();
         private static readonly Random Rnd = new Random();
 
-        public ShortUrlService(IShortUrlRepository shortUrlRepository)
+        public ShortUrlService(IShortUrlRepository shortUrlRepository, IShortUrlLogEntryRepository shortUrlLogEntryRepository)
         {
             _shortUrlRepository = shortUrlRepository;
+            _shortUrlLogEntryRepository = shortUrlLogEntryRepository;
         }
 
         public async Task<ShortUrlCreateResponse> Create(ShortUrlCreateRequest shortUrlCreateRequest)
@@ -58,6 +59,15 @@ namespace Nintex.Url.Shortening.Services
         public Task<List<ShortUrlModel>> GetAllShortUrlOfAUser(long accountId)
         {
             return _shortUrlRepository.Find(x => x.CreatorId == accountId);
+        }
+
+        public async Task<ShortUrlModel> GetShortUrl(string key, string remoteIp)
+        {
+            var shortUrlModel = await _shortUrlRepository.FirstOrDefault(x => x.Key == key);
+            if(shortUrlModel == null)
+                throw new ShortUrlNotFoundException();
+            await _shortUrlLogEntryRepository.Log(shortUrlModel.Id, remoteIp);
+            return shortUrlModel;
         }
 
         #region Supported Methods

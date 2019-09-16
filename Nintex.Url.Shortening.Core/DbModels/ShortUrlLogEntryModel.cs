@@ -13,7 +13,6 @@ namespace Nintex.Url.Shortening.Core.DbModels
         [Required]
         public DateTime AccessTimeUtc { get; set; }
         
-        [MaxLength(16)]
-        public byte[] ClientIp { get; set; }
+        public string ClientIp { get; set; }
     }
 }

@@ -38,6 +38,7 @@ namespace Nintex.Url.Shortening.Web
             services.AddDbContext<ShortUrlDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             new DependencyServiceRegister().Register(services);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddAuthentication(x =>
                 {

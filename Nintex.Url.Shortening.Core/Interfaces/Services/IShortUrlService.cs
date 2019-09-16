@@ -10,5 +10,6 @@ namespace Nintex.Url.Shortening.Core.Interfaces.Services
         Task<ShortUrlCreateResponse> Create(ShortUrlCreateRequest shortUrlCreateRequest);
         Task Remove(ShortUrlRemoveRequest shortUrlRemoveRequest);
         Task<List<ShortUrlModel>> GetAllShortUrlOfAUser(long accountId);
+        Task<ShortUrlModel> GetShortUrl(string key, string remoteIp);
     }
 }

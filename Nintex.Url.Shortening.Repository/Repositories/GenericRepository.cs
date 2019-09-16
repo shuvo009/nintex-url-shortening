@@ -49,7 +49,7 @@ namespace Nintex.Url.Shortening.Repository.Repositories
 
         #region Supported Methods
 
-        private Task Save()
+        internal Task Save()
         {
             return ShortUrlDbContext.SaveChangesAsync();
         }
