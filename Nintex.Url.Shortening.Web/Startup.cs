@@ -80,18 +80,21 @@ namespace Nintex.Url.Shortening.Web
 
             services.AddMvcCore().AddMetricsCore();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSwaggerGen(c => {  
-                c.SwaggerDoc("v1", new Info {  
-                    Version = "v1",  
-                    Title = "Short URL API",  
-                    Description = "Nintex Short URL"  
-                });  
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Short URL API",
+                    Description = "Nintex Short URL"
+                });
             });
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddMvcCore().AddMetricsCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -135,11 +138,12 @@ namespace Nintex.Url.Shortening.Web
                     template: "a/a/{key}");
             });
 
-            app.UseSwagger();  
-            app.UseSwaggerUI(c => {  
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Short URL API");  
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Short URL API");
                 c.RoutePrefix = "docs/swagger";
-            });  
+            });
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
