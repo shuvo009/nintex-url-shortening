@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nintex.Url.Shortening.Core.Interfaces.Auth;
 using Nintex.Url.Shortening.Core.Interfaces.Services;
@@ -9,6 +10,7 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ShortUrlController : ControllerBase
     {
         private readonly IShortUrlService _shortUrlService;
@@ -26,7 +28,7 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
             var shortUrls = await _shortUrlService.GetAllShortUrlOfAUser(_currentLoginUser.AccountId);
             return Ok(shortUrls);
         }
-        
+
         [HttpGet("logs/{shortUrlId}")]
         public async Task<IActionResult> Get(Int64 shortUrlId)
         {
@@ -42,7 +44,7 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
             var shortUrlCreateResponse = await _shortUrlService.Create(shortUrlCreateRequest);
             return Ok(shortUrlCreateResponse);
         }
-        
+
         [HttpPost("remove")]
         public async Task<IActionResult> Remove([FromBody] ShortUrlRemoveRequest shortUrlRemoveRequest)
         {
@@ -55,7 +57,7 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
 
         private string GetHostUrl()
         {
-            return Request.Scheme + "://" + Request.Host.Value + Request.PathBase;
+            return $"{Request.Scheme}://{Request.Host.Value}{Request.PathBase}/r";
         }
 
         #endregion

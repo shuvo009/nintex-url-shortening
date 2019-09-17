@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import {AppConstant} from "./appConstant"
-import {RouteConstant} from "./routeConstant"
 @Injectable()
 export class AuthGuard implements CanActivate {
 

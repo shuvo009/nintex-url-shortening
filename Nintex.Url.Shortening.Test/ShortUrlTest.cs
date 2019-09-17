@@ -64,7 +64,7 @@ namespace Nintex.Url.Shortening.Test
             var shortUrlCreateRequest = new ShortUrlCreateRequest
             {
                 LongUrl = "https://stackoverflow.com/questions/37724738/how-to-unit-test-asp-net-core-application-with-constructor-dependency-injection",
-                HostUrl = "http://127.0.0.1",
+                HostUrl = "http://127.0.0.1/r",
                 UserId = currentLoginUser.AccountId
             };
             var response = await shortUrlService.Create(shortUrlCreateRequest);
@@ -81,7 +81,7 @@ namespace Nintex.Url.Shortening.Test
             var shortUrlCreateRequest = new ShortUrlCreateRequest
             {
                 LongUrl = "https://stackoverflow.com/questions/37724738/how-to-unit-test-asp-net-core-application-with-constructor-dependency-injection",
-                HostUrl = "http://127.0.0.1",
+                HostUrl = "http://127.0.0.1/r",
                 UserId = currentLoginUser.AccountId
             };
             var firstResponse = await shortUrlService.Create(shortUrlCreateRequest);
@@ -99,7 +99,7 @@ namespace Nintex.Url.Shortening.Test
             var shortUrlCreateRequest = new ShortUrlCreateRequest
             {
                 LongUrl = "https://stackoverflow.com/questions/37724738/how-to-unit-test-asp-net-core-application-with-constructor-dependency-injection",
-                HostUrl = "http://127.0.0.1",
+                HostUrl = "http://127.0.0.1/r",
                 UserId = currentLoginUser.AccountId
             };
             var response = await shortUrlService.Create(shortUrlCreateRequest);
@@ -116,7 +116,7 @@ namespace Nintex.Url.Shortening.Test
             var shortUrlCreateRequest = new ShortUrlCreateRequest
             {
                 LongUrl = "https://stackoverflow.com/questions/37724738/how-to-unit-test-asp-net-core-application-with-constructor-dependency-injection",
-                HostUrl = "http://127.0.0.1",
+                HostUrl = "http://127.0.0.1/r",
                 UserId = currentLoginUser.AccountId
             };
 
@@ -139,7 +139,7 @@ namespace Nintex.Url.Shortening.Test
             var shortUrlCreateRequest = new ShortUrlCreateRequest
             {
                 LongUrl = "stackoverflow/questions/37724738/how-to-unit-test-asp-net-core-application-with-constructor-dependency-injection",
-                HostUrl = "http://127.0.0.1",
+                HostUrl = "http://127.0.0.1/r",
                 UserId = currentLoginUser.AccountId
             };
             var exception = Assert.ThrowsAsync<Exception>(() => shortUrlService.Create(shortUrlCreateRequest));
@@ -155,7 +155,7 @@ namespace Nintex.Url.Shortening.Test
 
             var shortUrlCreateRequest = new ShortUrlCreateRequest
             {
-                HostUrl = "http://127.0.0.1",
+                HostUrl = "http://127.0.0.1/r",
                 UserId = currentLoginUser.AccountId
             };
             var exception = Assert.ThrowsAsync<Exception>(() => shortUrlService.Create(shortUrlCreateRequest));
@@ -172,7 +172,7 @@ namespace Nintex.Url.Shortening.Test
             var shortUrlCreateRequest = new ShortUrlCreateRequest
             {
                 LongUrl = "https://stackoverflow.com/questions/37724738/how-to-unit-test-asp-net-core-application-with-constructor-dependency-injection",
-                HostUrl = "http://127.0.0.1",
+                HostUrl = "http://127.0.0.1/r",
                 UserId = currentLoginUser.AccountId
             };
             await shortUrlService.Create(shortUrlCreateRequest);

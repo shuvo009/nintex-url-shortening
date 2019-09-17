@@ -23,13 +23,16 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="ClientApp\src\app\NewFolder\**" />
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="ClientApp\src\app\NewFolder\**" />
-    <EmbeddedResource Remove="ClientApp\src\app\NewFolder\**" />
     <None Remove="$(SpaRoot)**" />
-    <None Remove="ClientApp\src\app\NewFolder\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\auth\base.auth.component.ts" />
+    <None Remove="ClientApp\src\app\models\index.ts" />
+    <None Remove="ClientApp\src\app\models\IShortUrlLog.ts" />
+    <None Remove="ClientApp\src\app\models\ShortUrlModel.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +47,13 @@
     <ProjectReference Include="..\Nintex.Url.Shortening.Core\Nintex.Url.Shortening.Core.csproj" />
     <ProjectReference Include="..\Nintex.Url.Shortening.DependencyInjection\Nintex.Url.Shortening.DependencyInjection.csproj" />
     <ProjectReference Include="..\Nintex.Url.Shortening.Repository\Nintex.Url.Shortening.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\auth\base.auth.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\index.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\IShortUrlLog.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\ShortUrlModel.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -6,14 +6,18 @@
         <div class="card">
           <div class="card-header">Create Short Url</div>
           <div class="card-body">
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{errorMessage}}
+            </div>
+
             <div class="form-group row">
               <label class="col-md-1 col-form-label text-md-right">Long URL</label>
               <div class="col-md-11">
-                <input type="text" class="form-control" name="email-address" required autofocus>
+                <input type="text" class="form-control" name="email-address" required autofocus [(ngModel)]="longUrl">
               </div>
             </div>
             <div class="col-md-6 offset-md-5">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" (click)="onGenerateClick()">
                 Generate
               </button>
             </div>
@@ -29,26 +33,60 @@
 <table class="table table-bordered mt-3">
   <thead>
   <tr>
+    <th width="10%">Created</th>
     <th width="10%">Short Url</th>
     <th width="50%">Original Url</th>
     <th width="10%">Logs</th>
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john@example.com</td>
-  </tr>
-  <tr>
-    <td>Mary</td>
-    <td>Moe</td>
-    <td>mary@example.com</td>
-  </tr>
-  <tr>
-    <td>July</td>
-    <td>Dooley</td>
-    <td>july@example.com</td>
-  </tr>
+    <tr *ngFor="let shortUrl of shortUrlModels; let i = index">
+      <td>
+        {{shortUrl.createdUtc  | date:"dd/MM/yy hh:mm a"}}
+      </td>
+      <td><a target="_blank" href="{{getShortUrl(shortUrl.key)}}">{{getShortUrl(shortUrl.key)}}</a></td>
+      <td><a target="_blank" href="{{shortUrl.url}}">{{shortUrl.url}}</a></td>
+      <td>
+        <button type="submit" class="btn btn-primary" (click)="showLogs(shortUrl.id)">
+          Logs
+        </button>
+      </td>
+    </tr>
   </tbody>
 </table>
+
+<div class="modal"  id="shortUrlLog" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Logs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered mt-3">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>IP</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let shortUrlLog of selectedShortUrlLog; let i = index">
+            <td>
+              {{shortUrlLog.accessTimeUtc| date:"dd/MM/yy hh:mm a"}}
+            </td>
+            <td>
+              {{shortUrlLog.clientIp}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -22,14 +22,14 @@ namespace Nintex.Url.Shortening.Web.Controllers.Api
         public async Task<IActionResult> UserLogin([FromBody] LoginViewModel loginViewModel)
         {
             var loginInfo = await _userStore.Login(loginViewModel);
-            return Ok(new ServerResponse<LoginResponse> {IsSuccess = true, Data = loginInfo});
+            return Ok(loginInfo);
         }
 
         [HttpPost("signup")]
         public async Task<IActionResult> UserSignUp([FromBody] SignUpViewModel signupViewModel)
         {
             await _userStore.UserSignUp(signupViewModel);
-            return Ok(new ServerResponse<object> {IsSuccess = true});
+            return Ok();
         }
     }
 }

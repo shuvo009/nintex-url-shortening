@@ -36,24 +36,18 @@ namespace Nintex.Url.Shortening.Web.Middleware
         {
             Logger.Error(exception);
             var code = HttpStatusCode.InternalServerError; // 500 if unexpected
-            var serverResponse = new ServerResponse<object> {IsSuccess = false, Error = exception.Message};
 
             if (exception is InvalidLoginException)
             {
                 code = HttpStatusCode.Unauthorized;
-                serverResponse.Error = exception.Message;
             }
             else if (exception is ShortUrlNotFoundException)
             {
                 code = HttpStatusCode.NotFound;
-                serverResponse.Error = exception.Message;
             }
-
-            var serializerSettings = new JsonSerializerSettings();
-            serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            var result = JsonConvert.SerializeObject(serverResponse, serializerSettings);
+            var result = JsonConvert.SerializeObject(new { error = exception.Message });
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int) code;
+            context.Response.StatusCode = (int)code;
             return context.Response.WriteAsync(result);
         }
     }

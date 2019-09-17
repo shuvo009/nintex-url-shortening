@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -86,6 +87,11 @@ namespace Nintex.Url.Shortening.Web
                     Description = "Nintex Short URL"  
                 });  
             });
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,7 +114,10 @@ namespace Nintex.Url.Shortening.Web
             else
                 app.UseExceptionHandler("/Error");
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+
             app.UseCookiePolicy();
             app.UseCors(x => x
                 .AllowAnyOrigin()
@@ -119,13 +128,30 @@ namespace Nintex.Url.Shortening.Web
             app.UseAuthentication();
             app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "a/a/{key}");
+            });
 
             app.UseSwagger();  
             app.UseSwaggerUI(c => {  
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Short URL API");  
                 c.RoutePrefix = "docs/swagger";
             });  
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
         }
     }
 }

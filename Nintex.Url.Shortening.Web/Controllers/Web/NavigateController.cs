@@ -17,19 +17,19 @@ namespace Nintex.Url.Shortening.Web.Controllers.Web
             _accessor = accessor;
         }
 
-//        [ResponseCache(Duration = 60 * 60 * 48, Location = ResponseCacheLocation.Client)]
-//        [HttpGet("/{key}")]
-//        public async Task<IActionResult> NavigateTo(string key)
-//        {
-//            try
-//            {
-//                var shortUrlModel = await _shortUrlService.GetShortUrl(key, _accessor?.HttpContext?.Connection?.RemoteIpAddress?.ToString());
-//                return RedirectPermanent(shortUrlModel.Url);
-//            }
-//            catch (Exception e)
-//            {
-//                return View("UrlNotFound", key);
-//            }
-//        }
+        [ResponseCache(Duration = 60 * 60 * 48, Location = ResponseCacheLocation.Client)]
+        [HttpGet("r/{key}")]
+        public async Task<IActionResult> NavigateTo(string key)
+        {
+            try
+            {
+                var shortUrlModel = await _shortUrlService.GetShortUrl(key, _accessor?.HttpContext?.Connection?.RemoteIpAddress?.ToString());
+                return RedirectPermanent(shortUrlModel.Url);
+            }
+            catch (Exception e)
+            {
+                return View("UrlNotFound", key);
+            }
+        }
     }
 }

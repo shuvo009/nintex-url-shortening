@@ -1,9 +1,9 @@
 export class ApiConstant {
-    static login = '';
-    static signup = '';
-    static getShortUrls = '';
-    static createShortUrl = '';
-    static removeShortUrl = '';
-    static getLogsOfShortUrl = '';
+    static login = 'api/Users/token';
+    static signup = 'api/Users/signup';
+    static getShortUrls = 'api/ShortUrl/get';
+    static createShortUrl = 'api/ShortUrl/create';
+    static removeShortUrl = 'api/ShortUrl/remove';
+    static getLogsOfShortUrl = 'api/ShortUrl/logs';
 }
 

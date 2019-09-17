@@ -53,10 +53,10 @@ namespace Nintex.Url.Shortening.Identity
                 throw new Exception(ApplicationVariable.PasswordDoesNotMatch);
 
             var account = await _accountRepository.Find(x => x.Username.ToLower() == signUpViewModel.Username);
-            if (account != null)
+            if (account.Count > 0)
                 throw new Exception(ApplicationVariable.UserAlreadyExist);
 
-            var accountModel = new AccountModel { Username = signUpViewModel.Username };
+            var accountModel = new AccountModel { Username = signUpViewModel.Username, Name = signUpViewModel.Name };
             PasswordHasher.CreatePasswordHash(signUpViewModel.Password, out var passwordHash, out var passwordSalt);
             accountModel.PasswordHash = passwordHash;
             accountModel.PasswordSalt = passwordSalt;

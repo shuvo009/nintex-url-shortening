@@ -1,9 +1,8 @@
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from "./app.component";
-import { LoaderService, LoaderInterceptor, AuthGuard } from "./helpers";
+import { LoaderInterceptor, AuthGuard } from "./helpers";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module"
 
@@ -19,7 +18,6 @@ import { AppRoutingModule } from "./app-routing.module"
   ],
   providers: [
     AuthGuard,
-    LoaderService,
     LoaderInterceptor,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],

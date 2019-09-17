@@ -12,7 +12,7 @@ export class HttpClientService {
         resolve(data);
       },
         (error) => {
-          reject(error);
+          reject(error.error.error);
         });
     });
   }
@@ -23,7 +23,7 @@ export class HttpClientService {
         resolve(data);
       },
         (error) => {
-          reject(error);
+          reject(error.error.error);
         });
     });
   }
