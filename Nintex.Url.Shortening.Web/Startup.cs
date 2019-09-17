@@ -1,6 +1,8 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using App.Metrics;
+using App.Metrics.Filtering;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -75,7 +77,7 @@ namespace Nintex.Url.Shortening.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddMvcCore().AddMetricsCore();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(c => {  
                 c.SwaggerDoc("v1", new Info {  
@@ -83,7 +85,7 @@ namespace Nintex.Url.Shortening.Web
                     Title = "Short URL API",  
                     Description = "Nintex Short URL"  
                 });  
-            });  
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

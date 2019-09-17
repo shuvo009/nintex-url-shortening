@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nintex.Url.Shortening.Ident
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nintex.Url.Shortening.DependencyInjection", "Nintex.Url.Shortening.DependencyInjection\Nintex.Url.Shortening.DependencyInjection.csproj", "{D1488BB9-495B-43AA-96D6-1DA8ACC696B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nintex.Url.Shortening.Web", "Nintex.Url.Shortening.Web\Nintex.Url.Shortening.Web.csproj", "{9C335A83-8617-43D5-BB93-163D632DC431}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nintex.Url.Shortening.Web", "Nintex.Url.Shortening.Web\Nintex.Url.Shortening.Web.csproj", "{E7EDD13A-CE25-4901-8D98-9BF2790C192D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{D1488BB9-495B-43AA-96D6-1DA8ACC696B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1488BB9-495B-43AA-96D6-1DA8ACC696B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1488BB9-495B-43AA-96D6-1DA8ACC696B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C335A83-8617-43D5-BB93-163D632DC431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C335A83-8617-43D5-BB93-163D632DC431}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C335A83-8617-43D5-BB93-163D632DC431}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C335A83-8617-43D5-BB93-163D632DC431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7EDD13A-CE25-4901-8D98-9BF2790C192D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7EDD13A-CE25-4901-8D98-9BF2790C192D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7EDD13A-CE25-4901-8D98-9BF2790C192D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7EDD13A-CE25-4901-8D98-9BF2790C192D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

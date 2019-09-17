@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using App.Metrics.AspNetCore;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
@@ -36,6 +37,7 @@ namespace Nintex.Url.Shortening.Web
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
+                .UseMetrics()
                 .UseStartup<Startup>()
                 .ConfigureLogging(logging =>
                 {
