@@ -35,9 +35,9 @@ namespace Nintex.Url.Shortening.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
             services.AddDbContext<ShortUrlDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(connectionString));
 
             new DependencyServiceRegister().Register(services);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
