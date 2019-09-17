@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiConstant } from '../helpers'
+import { ApiConstant, AppConstant } from '../helpers'
 import { HttpClientService } from "../services/httpClient.service";
 import { IShortUrlLog, IShortUrlModel } from "../models"
 declare var $: any;
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   selectedShortUrlLog: IShortUrlLog[] = [];
   errorMessage: string;
   isOnRequest: boolean;
-  baseUrl:string = window.location.origin;
+  baseUrl: string = window.location.origin;
 
   constructor(private httpClient: HttpClientService) {
   }
@@ -39,7 +39,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getShortUrl(key:string) {
+  async removeShortUrl(id: number) {
+    this.errorMessage = '';
+    try {
+      const params = { id: id };
+      await this.httpClient.postAsync(ApiConstant.removeShortUrl, params);
+      this.getShortUrls();
+    } catch (e) {
+      this.errorMessage = e;
+    }
+  }
+
+  getShortUrl(key: string) {
     return `${this.baseUrl}/r/${key}`;
   }
 
@@ -69,6 +80,11 @@ export class HomeComponent implements OnInit {
   inputGuard() {
     if (!this.longUrl || this.longUrl.length < 1) {
       throw 'Please enter url';
+    }
+    const regExp = new RegExp(AppConstant.urlPatten);
+    const isValid = regExp.test(this.longUrl);
+    if (!isValid) {
+      throw 'Please enter valid url';
     }
   }
 

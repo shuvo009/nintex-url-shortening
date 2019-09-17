@@ -34,9 +34,11 @@
   <thead>
   <tr>
     <th width="10%">Created</th>
+    <th width="10%">Expires</th>
     <th width="10%">Short Url</th>
     <th width="50%">Original Url</th>
-    <th width="10%">Logs</th>
+    <th width="5%">Logs</th>
+    <th width="5%">Remove</th>
   </tr>
   </thead>
   <tbody>
@@ -44,11 +46,19 @@
       <td>
         {{shortUrl.createdUtc  | date:"dd/MM/yy hh:mm a"}}
       </td>
+      <td>
+        {{shortUrl.expiresUtc  | date:"dd/MM/yy hh:mm a"}}
+      </td>
       <td><a target="_blank" href="{{getShortUrl(shortUrl.key)}}">{{getShortUrl(shortUrl.key)}}</a></td>
       <td><a target="_blank" href="{{shortUrl.url}}">{{shortUrl.url}}</a></td>
       <td>
         <button type="submit" class="btn btn-primary" (click)="showLogs(shortUrl.id)">
           Logs
+        </button>
+      </td>
+      <td>
+        <button type="submit" class="btn btn-danger" (click)="removeShortUrl(shortUrl.id)">
+          Remove
         </button>
       </td>
     </tr>
