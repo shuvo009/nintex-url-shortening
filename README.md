@@ -7,5 +7,7 @@ This demo is hosted at AWS Elastic Beanstalk
 
 Url: **http://shorturlnintx.us-east-1.elasticbeanstalk.com**
 
-Username: **admin**
-Password: **admin**
+## Login Credentials
+Username | Passowrd
+--- | --- |
+**admin** | **admin** |
