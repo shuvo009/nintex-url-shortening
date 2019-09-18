@@ -24,3 +24,7 @@ Username | Passowrd
 * SQL Server 
 * Angular 8
 * Nunit
+
+## Project Architecture
+I use `Onion` Architecture here.
+![alt text](https://github.com/shuvo009/nintex-url-shortening/blob/master/ProjectArchitecture.PNG "Project Architecture")
