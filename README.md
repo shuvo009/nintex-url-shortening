@@ -26,5 +26,23 @@ Username | Passowrd
 * Nunit
 
 ## Project Architecture
-I use `Onion` Architecture here.
+I use `Onion Architecture` here.
 ![alt text](https://github.com/shuvo009/nintex-url-shortening/blob/master/ProjectArchitecture.PNG "Project Architecture")
+
+## Design Patterns are used
+* MVC
+* Repository patterns 
+* Façade
+
+## Run Unit Tests
+1. Go to `Test > Windows > Test Explorer` from Visual Studio main menu.
+2. Click on `run all Test`
+
+Documantation & Tools:
+1. Visual Studio 2019
+2. Swagger for API documentation (`http://localhost:8000/docs/swagger`)
+3. app-metrics for server metrics (`http://localhost:8000/ metrics`)
+4. Nlog for logging 
+
+
+
