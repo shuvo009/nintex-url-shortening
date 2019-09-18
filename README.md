@@ -17,3 +17,10 @@ Username | Passowrd
 2. Clone this repository 
 3. Run `docker-compose up`
 4. Browser at `http://localhost:8000`
+
+## Technologies Are Used
+* Asp.net Core 2.2
+* Entity Framework Core
+* SQL Server 
+* Angular 8
+* Nunit
