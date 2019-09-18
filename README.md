@@ -38,7 +38,7 @@ I use `Onion Architecture` here.
 1. Go to `Test > Windows > Test Explorer` from Visual Studio main menu.
 2. Click on `run all Test`
 
-Documantation & Tools:
+## Documantation & Tools:
 1. Visual Studio 2019
 2. Swagger for API documentation (`http://localhost:8000/docs/swagger`)
 3. app-metrics for server metrics (`http://localhost:8000/ metrics`)
