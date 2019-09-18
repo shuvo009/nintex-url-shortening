@@ -11,3 +11,9 @@ Url: **http://shorturlnintx.us-east-1.elasticbeanstalk.com**
 Username | Passowrd
 --- | --- |
 **admin** | **admin** |
+
+## Deploy Locally
+1. Download and install Docker https://www.docker.com/products/docker-desktop
+2. Clone this repository 
+3. Run `docker-compose up`
+4. Browser at `http://localhost:8000`
