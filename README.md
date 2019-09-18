@@ -43,6 +43,7 @@ I use `Onion Architecture` here.
 2. Swagger for API documentation (`http://localhost:8000/docs/swagger`)
 3. app-metrics for server metrics (`http://localhost:8000/ metrics`)
 4. Nlog for logging 
+5. Docker
 
 
 
